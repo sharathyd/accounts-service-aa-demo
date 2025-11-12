@@ -363,11 +363,11 @@ environments:
   data:
     base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
   subEnvironments:
-    - name: OpenAPI env localhost:8081
+    - name: Dev - OpenAPI env localhost:8081
       meta:
         id: env_90a7a2fba5a843eebcfdd6b4c634cb81
         created: 1762944103438
-        modified: 1762945504786
+        modified: 1762953979993
         isPrivate: false
         sortKey: 1762944103438
       data:
@@ -375,6 +375,7 @@ environments:
         base_path: ""
         host: localhost:8081
         accountId: 4d219084-dd5b-4b91-8f00-9e2497a31b58
+      color: "#c38418"
 spec:
   contents:
     openapi: 3.0.3
