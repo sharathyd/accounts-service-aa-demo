@@ -1,0 +1,24 @@
+name: API Validation
+on:
+  pull_request:
+    paths:
+      - 'api/**'
+      - '.spectral.yaml'
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Inso CLI
+        uses: kong/setup-inso@v2
+        with:
+          inso-version: 11.4.0
+          
+      - name: running the account service 
+        run: docker compose up -d
+        
+      - name: Lint API Specification
+        run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml) ; inso lint spec -w api/accounts-service.yaml $INSO_SPEC_ID
+  
+      - name: Run API Tests
+        run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml); inso run test -w api/accounts-service.yaml $INSO_SPEC_ID "Accounts Test Suite" --env "DEV - OpenAPI env localhost:8081 - DEV "
