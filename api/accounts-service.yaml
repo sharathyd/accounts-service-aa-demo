@@ -5,19 +5,371 @@ meta:
   created: 1762936616796
   modified: 1762936616796
   description: ""
+collection:
+  - name: accounts
+    meta:
+      id: fld_8c2fdb975bbe40edb5c6bf744cdb2329
+      created: 1762944103439
+      modified: 1762945291079
+      sortKey: -1762944103439
+      description: Operations related to account management (retrieval and balance updates)
+    children:
+      - url: "{{ _.base_url }}/accounts"
+        name: List all accounts
+        meta:
+          id: req_9ec2e9c4e245496d9cd33c9b018b14e9
+          created: 1762944103441
+          modified: 1762944103441
+          isPrivate: false
+          description: Returns a list of all accounts with basic details.
+          sortKey: -1762944103441
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts/{{ _.accountId }}"
+        name: Retrieve a single account
+        meta:
+          id: req_19ef7be7dae843a09be9635b61704194
+          created: 1762944103442
+          modified: 1762945304960
+          isPrivate: false
+          description: Returns details for the specified account including current balance.
+          sortKey: -1762944103442
+        method: GET
+        scripts:
+          preRequest: >-
+            if (!insomnia.environment.get("accountId")) {
+                const host = insomnia.environment.get("host");
+                const scheme = insomnia.environment.get("scheme");
+                
+                // Use proper variable naming convention for the constructed URL
+                const baseUrl = `${scheme}://${host}`;
+                
+                const createAccountRequest = {
+                    url: `${baseUrl}/accounts`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: {
+                        mode: 'raw',
+                        raw: JSON.stringify({
+                            type: 'savings',
+                            initial_balance: 5000.00,
+                        }),
+                    },
+                };
+
+                // Note: The script environment already runs in an async context, 
+                // but using a Promise wrapper is standard practice for the sendRequest callback.
+                const response = await new Promise((resolve, reject) => {
+                    // Correctly using insomnia.sendRequest
+                    insomnia.sendRequest(createAccountRequest, (err, resp) => {
+                        if (err != null) {
+                            console.error("sendRequest Error:", err);
+                            reject(err);
+                        }
+                        else {
+                            resolve(resp);
+                        }
+                    });
+                });
+
+                if (response.code !== 201) {
+                    // Throwing an error will stop the main request
+                    throw new Error(`Account creation failed. Status code: ${response.code}. Response: ${response.body.toString()}`);
+                } 
+                
+                // --- FIX APPLIED HERE ---
+                // 1. Removed the invalid 'const' keyword.
+                // 2. Used a standard variable name (parsedBody) to hold the result.
+                const parsedBody = JSON.parse(response.body.toString());
+                
+                // Set the environment variable using the parsed result
+                insomnia.environment.set('accountId', parsedBody.account_id);
+                
+                console.log(`Successfully created account and set accountId: ${parsedBody.account_id}`);
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts"
+        name: Create a new account
+        meta:
+          id: req_52753935b46c4a79826882a38f5d25b4
+          created: 1762944103442
+          modified: 1762944103442
+          isPrivate: false
+          description: Creates a new account with an initial balance. The account ID is
+            automatically generated.
+          sortKey: -1762944103442
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "type": "savings",
+              "initial_balance": 5000
+            }
+        headers:
+          - name: Content-Type
+            disabled: false
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts/{{ _.accountId }}/debit"
+        name: Debit an account
+        meta:
+          id: req_1ae68e90949d40c98ee0482a3335e7be
+          created: 1762944103443
+          modified: 1762945186051
+          isPrivate: false
+          description: Decreases the account's balance by the specified amount.
+          sortKey: -1762944103443
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "amount": 100
+            }
+        headers:
+          - name: Content-Type
+            disabled: false
+            value: application/json
+        scripts:
+          preRequest: >-
+            if (!insomnia.environment.get("accountId")) {
+                const host = insomnia.environment.get("host");
+                const scheme = insomnia.environment.get("scheme");
+                
+                // Use proper variable naming convention for the constructed URL
+                const baseUrl = `${scheme}://${host}`;
+                
+                const createAccountRequest = {
+                    url: `${baseUrl}/accounts`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: {
+                        mode: 'raw',
+                        raw: JSON.stringify({
+                            type: 'savings',
+                            initial_balance: 5000.00,
+                        }),
+                    },
+                };
+
+                // Note: The script environment already runs in an async context, 
+                // but using a Promise wrapper is standard practice for the sendRequest callback.
+                const response = await new Promise((resolve, reject) => {
+                    // Correctly using insomnia.sendRequest
+                    insomnia.sendRequest(createAccountRequest, (err, resp) => {
+                        if (err != null) {
+                            console.error("sendRequest Error:", err);
+                            reject(err);
+                        }
+                        else {
+                            resolve(resp);
+                        }
+                    });
+                });
+
+                if (response.code !== 201) {
+                    // Throwing an error will stop the main request
+                    throw new Error(`Account creation failed. Status code: ${response.code}. Response: ${response.body.toString()}`);
+                } 
+                
+                // --- FIX APPLIED HERE ---
+                // 1. Removed the invalid 'const' keyword.
+                // 2. Used a standard variable name (parsedBody) to hold the result.
+                const parsedBody = JSON.parse(response.body.toString());
+                
+                // Set the environment variable using the parsed result
+                insomnia.environment.set('accountId', parsedBody.account_id);
+                
+                console.log(`Successfully created account and set accountId: ${parsedBody.account_id}`);
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts/{{ _.accountId }}/credit"
+        name: Credit an account
+        meta:
+          id: req_5bc648bac2c94b96a6ec7c4327e4bbc2
+          created: 1762944103443
+          modified: 1762945168339
+          isPrivate: false
+          description: Increases the account's balance by the specified amount.
+          sortKey: -1762944103443
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "amount": 100
+            }
+        headers:
+          - name: Content-Type
+            disabled: false
+            value: application/json
+        scripts:
+          preRequest: >-
+            if (!insomnia.environment.get("accountId")) {
+                const host = insomnia.environment.get("host");
+                const scheme = insomnia.environment.get("scheme");
+                
+                // Use proper variable naming convention for the constructed URL
+                const baseUrl = `${scheme}://${host}`;
+                
+                const createAccountRequest = {
+                    url: `${baseUrl}/accounts`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: {
+                        mode: 'raw',
+                        raw: JSON.stringify({
+                            type: 'savings',
+                            initial_balance: 5000.00,
+                        }),
+                    },
+                };
+
+                // Note: The script environment already runs in an async context, 
+                // but using a Promise wrapper is standard practice for the sendRequest callback.
+                const response = await new Promise((resolve, reject) => {
+                    // Correctly using insomnia.sendRequest
+                    insomnia.sendRequest(createAccountRequest, (err, resp) => {
+                        if (err != null) {
+                            console.error("sendRequest Error:", err);
+                            reject(err);
+                        }
+                        else {
+                            resolve(resp);
+                        }
+                    });
+                });
+
+                if (response.code !== 201) {
+                    // Throwing an error will stop the main request
+                    throw new Error(`Account creation failed. Status code: ${response.code}. Response: ${response.body.toString()}`);
+                } 
+                
+                // --- FIX APPLIED HERE ---
+                // 1. Removed the invalid 'const' keyword.
+                // 2. Used a standard variable name (parsedBody) to hold the result.
+                const parsedBody = JSON.parse(response.body.toString());
+                
+                // Set the environment variable using the parsed result
+                insomnia.environment.set('accountId', parsedBody.account_id);
+                
+                console.log(`Successfully created account and set accountId: ${parsedBody.account_id}`);
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: health
+    meta:
+      id: fld_dd5fcd7978844143bc61cbcea3f0cad8
+      created: 1762944103439
+      modified: 1762944103439
+      sortKey: -1762944103439
+      description: Health check endpoints for monitoring service status
+    children:
+      - url: "{{ _.base_url }}/health"
+        name: Health check endpoint
+        meta:
+          id: req_929392a20b01483c92e83754168ff0c4
+          created: 1762944103440
+          modified: 1762944103440
+          isPrivate: false
+          description: Returns the API's health status
+          sortKey: -1762944103440
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/health"
+        name: Health check endpoint (HEAD)
+        meta:
+          id: req_0fa48860511e4c788c2865babb9aeb98
+          created: 1762944103441
+          modified: 1762944103441
+          isPrivate: false
+          description: Returns the API's health status without body
+          sortKey: -1762944103441
+        method: HEAD
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616802
-    modified: 1762936616802
+    modified: 1762945291077
 environments:
   name: Base Environment
   meta:
     id: env_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616801
-    modified: 1762936616801
+    modified: 1762945291079
     isPrivate: false
+  data:
+    base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+  subEnvironments:
+    - name: OpenAPI env localhost:8081
+      meta:
+        id: env_90a7a2fba5a843eebcfdd6b4c634cb81
+        created: 1762944103438
+        modified: 1762945291079
+        isPrivate: false
+        sortKey: 1762944103438
+      data:
+        scheme: http
+        base_path: ""
+        host: localhost:8081
+        accountId: f86e3fd0-e871-47c6-b05c-8eef2da94e86
 spec:
   contents:
     openapi: 3.0.3
