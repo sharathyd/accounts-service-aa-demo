@@ -124,7 +124,6 @@ collection:
             }
         headers:
           - name: Content-Type
-            disabled: false
             value: application/json
         scripts:
           afterResponse: >-
@@ -160,7 +159,6 @@ collection:
             }
         headers:
           - name: Content-Type
-            disabled: false
             value: application/json
         scripts:
           preRequest: >-
@@ -242,7 +240,6 @@ collection:
             }
         headers:
           - name: Content-Type
-            disabled: false
             value: application/json
         scripts:
           preRequest: >-
