@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_8c2fdb975bbe40edb5c6bf744cdb2329
       created: 1762944103439
-      modified: 1762945291079
+      modified: 1762945504787
       sortKey: -1762944103439
       description: Operations related to account management (retrieval and balance updates)
     children:
@@ -109,7 +109,7 @@ collection:
         meta:
           id: req_52753935b46c4a79826882a38f5d25b4
           created: 1762944103442
-          modified: 1762944103442
+          modified: 1762945483582
           isPrivate: false
           description: Creates a new account with an initial balance. The account ID is
             automatically generated.
@@ -126,6 +126,14 @@ collection:
           - name: Content-Type
             disabled: false
             value: application/json
+        scripts:
+          afterResponse: >-
+            // Extract account_id from the response and store it in the
+            environment
+
+            let data = insomnia.response.json();
+
+            insomnia.environment.set("accountId", data.account_id);
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -347,13 +355,13 @@ cookieJar:
   meta:
     id: jar_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616802
-    modified: 1762945291077
+    modified: 1762945504783
 environments:
   name: Base Environment
   meta:
     id: env_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616801
-    modified: 1762945291079
+    modified: 1762945504786
     isPrivate: false
   data:
     base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
@@ -362,14 +370,14 @@ environments:
       meta:
         id: env_90a7a2fba5a843eebcfdd6b4c634cb81
         created: 1762944103438
-        modified: 1762945291079
+        modified: 1762945504786
         isPrivate: false
         sortKey: 1762944103438
       data:
         scheme: http
         base_path: ""
         host: localhost:8081
-        accountId: f86e3fd0-e871-47c6-b05c-8eef2da94e86
+        accountId: 4d219084-dd5b-4b91-8f00-9e2497a31b58
 spec:
   contents:
     openapi: 3.0.3
