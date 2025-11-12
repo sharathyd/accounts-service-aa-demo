@@ -12,13 +12,13 @@ jobs:
           inso-version: 11.4.0
           
       - name: running the account service 
-        run: docker compose up -d
+        run: docker compose up -d; sleep 20
         
       - name: Lint API Specification
         run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml) ; inso lint spec -w api/accounts-service.yaml $INSO_SPEC_ID
       - name: Check if server is up
         run: |
-          docker ps; sleep 20; curl --fail http://localhost:8081/health 
+          docker ps; curl --fail http://localhost:8081/health 
 
       - name: Run API Tests
         run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml); inso run test -w api/accounts-service.yaml $INSO_SPEC_ID "Accounts API Test Suite" --env "Dev - OpenAPI env localhost:8081"
