@@ -21,4 +21,4 @@ jobs:
         run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml) ; inso lint spec -w api/accounts-service.yaml $INSO_SPEC_ID
   
       - name: Run API Tests
-        run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml); inso run test -w api/accounts-service.yaml $INSO_SPEC_ID "Accounts Test Suite" --env "DEV - OpenAPI env localhost:8081 - DEV "
+        run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml); inso run test -w api/accounts-service.yaml $INSO_SPEC_ID "Accounts Test Suite" --env "Dev - OpenAPI env localhost:8081"
