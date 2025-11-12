@@ -17,7 +17,7 @@ jobs:
       - name: running the account service 
         run: docker compose up -d; sleep 20
       
-      - name: Check if server is up
+      - name: Check if account service is up and healthy
         run: |
           docker ps; curl --fail http://localhost:8081/health 
           
