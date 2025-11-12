@@ -15,8 +15,12 @@ jobs:
           inso-version: 11.4.0
           
       - name: running the account service 
-        run: docker compose up -d
-        
+        run: docker compose up -d; sleep 20
+      
+      - name: Check if server is up
+        run: |
+          docker ps; curl --fail http://localhost:8081/health 
+          
       - name: Lint API Specification
         run: INSO_SPEC_ID=$(awk '/spc_/{print $2}' api/accounts-service.yaml) ; inso lint spec -w api/accounts-service.yaml $INSO_SPEC_ID
   
