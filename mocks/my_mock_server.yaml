@@ -12,3 +12,128 @@ server:
     modified: 1763014245860
   url: http://localhost:8080
   useInsomniaCloud: false
+routes:
+  - name: /health
+    meta:
+      id: mock-route_46ff325fed3940f498626ff9a737b291
+      created: 1763014488851
+      modified: 1763014488851
+    body: ""
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:13:58 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: HEAD
+    mimeType: application/json
+    statusCode: 200
+    statusText: ""
+  - name: /health
+    meta:
+      id: mock-route_82974449d3494dd688e96cb74ce03e05
+      created: 1763014551998
+      modified: 1763014551998
+    body: '"Accounts API is running"'
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:15:44 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: GET
+    mimeType: application/json
+    statusCode: 200
+    statusText: ""
+  - name: /accounts
+    meta:
+      id: mock-route_d27f71961ee54a0ab2d1f154e16d4ac1
+      created: 1763014683676
+      modified: 1763014917277
+    body: |-
+      {
+      	"account_id": "190785d5-e546-40da-9511-1da0c430c032",
+      	"type": "savings",
+      	"balance": 5000.0
+      }
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:17:41 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: POST
+    mimeType: application/json
+    statusCode: 201
+    statusText: ""
+  - name: /accounts
+    meta:
+      id: mock-route_3015dafec7604c5b9fd978654f17050d
+      created: 1763014725771
+      modified: 1763014725771
+    body: '[{"account_id":"f86e3fd0-e871-47c6-b05c-8eef2da94e86","type":"savings","balance":5000.0},{"account_id":"4d219084-dd5b-4b91-8f00-9e2497a31b58","type":"savings","balance":5100.0},{"account_id":"41b747d4-1553-4780-ae3b-a1385cefc717","type":"savings","balance":5000.0},{"account_id":"5221935c-be1e-4dd4-82bb-fda7e62dea0f","type":"savings","balance":5000.0},{"account_id":"81366427-aa18-4952-baf2-a9885257a14c","type":"savings","balance":5000.0},{"account_id":"99157d4d-4475-459e-a691-8303f54315cd","type":"savings","balance":5000.0},{"account_id":"8fbd2534-a9ae-4d04-ae9c-676d499d477a","type":"savings","balance":5000.0},{"account_id":"cd138774-474f-4dad-a508-000962e5ec64","type":"savings","balance":5000.0},{"account_id":"5502bc07-e7e2-496b-b65a-657107f624bb","type":"savings","balance":5000.0},{"account_id":"1f107f23-727f-4f38-ab2f-732e0922dd10","type":"savings","balance":5000.0},{"account_id":"91604216-eca6-4b21-8291-90c1928d6bf8","type":"savings","balance":5000.0},{"account_id":"6a6aa925-a79b-413f-b2ff-4c748cedbe96","type":"savings","balance":5000.0},{"account_id":"90508bb1-d3dd-499b-a0da-e9919e5bcf8f","type":"savings","balance":5000.0},{"account_id":"9410aea8-6303-4adc-baee-32acf0a0a3e9","type":"savings","balance":5000.0},{"account_id":"3cb1104a-97e4-4434-980a-71343029a082","type":"savings","balance":5000.0},{"account_id":"29f77905-8b06-4223-b15c-2c7b2fd1d3c3","type":"savings","balance":5100.0},{"account_id":"b69ce97b-42be-4395-8aff-c36c823a22ad","type":"savings","balance":5000.0},{"account_id":"0df1becd-eda3-4d81-9416-b865ece123ae","type":"savings","balance":5000.0},{"account_id":"d5ff8c1d-5b0d-4763-b5ec-084f8b558dd4","type":"savings","balance":5000.0},{"account_id":"84c2bbe9-a917-491c-947b-61bfb8c415a6","type":"savings","balance":10700.0},{"account_id":"190785d5-e546-40da-9511-1da0c430c032","type":"savings","balance":5000.0}]'
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:18:36 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: GET
+    mimeType: application/json
+    statusCode: 200
+    statusText: ""
+  - name: /accounts/190785d5-e546-40da-9511-1da0c430c032/credit
+    meta:
+      id: mock-route_c26a6721c1bc4607b3bc991e186abcf6
+      created: 1763014797016
+      modified: 1763014797016
+    body: '{"account_id":"190785d5-e546-40da-9511-1da0c430c032","type":"savings","balance":5100.0}'
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:19:37 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: POST
+    mimeType: application/json
+    statusCode: 200
+    statusText: ""
+  - name: /accounts/190785d5-e546-40da-9511-1da0c430c032/debit
+    meta:
+      id: mock-route_93f4dc9f5afc411ab1b5edf07f8c0a13
+      created: 1763014856573
+      modified: 1763014856573
+    body: '{"account_id":"190785d5-e546-40da-9511-1da0c430c032","type":"savings","balance":5000.0}'
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:20:15 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: POST
+    mimeType: application/json
+    statusCode: 200
+    statusText: ""
+  - name: /accounts/190785d5-e546-40da-9511-1da0c430c032
+    meta:
+      id: mock-route_5be217a78a7a48da86d56f3e515fdf30
+      created: 1763014892334
+      modified: 1763014892334
+    body: '{"account_id":"190785d5-e546-40da-9511-1da0c430c032","type":"savings","balance":5000.0}'
+    headers:
+      - name: date
+        value: Thu, 13 Nov 2025 06:21:14 GMT
+      - name: server
+        value: uvicorn
+      - name: content-type
+        value: application/json
+    method: GET
+    mimeType: application/json
+    statusCode: 200
+    statusText: ""

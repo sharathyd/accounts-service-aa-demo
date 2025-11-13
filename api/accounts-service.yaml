@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_8c2fdb975bbe40edb5c6bf744cdb2329
       created: 1762944103439
-      modified: 1762958779532
+      modified: 1763014875169
       sortKey: -1762944103439
       description: Operations related to account management (retrieval and balance updates)
     children:
@@ -19,10 +19,10 @@ collection:
         meta:
           id: req_9ec2e9c4e245496d9cd33c9b018b14e9
           created: 1762944103441
-          modified: 1762944103441
+          modified: 1763014614560
           isPrivate: false
           description: Returns a list of all accounts with basic details.
-          sortKey: -1762944103441
+          sortKey: -1762944103543
         method: GET
         settings:
           renderRequestBody: true
@@ -109,11 +109,11 @@ collection:
         meta:
           id: req_52753935b46c4a79826882a38f5d25b4
           created: 1762944103442
-          modified: 1762945483582
+          modified: 1763014659415
           isPrivate: false
           description: Creates a new account with an initial balance. The account ID is
             automatically generated.
-          sortKey: -1762944103442
+          sortKey: -1762944103643
         method: POST
         body:
           mimeType: application/json
@@ -352,13 +352,13 @@ cookieJar:
   meta:
     id: jar_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616802
-    modified: 1762958779529
+    modified: 1763014875167
 environments:
   name: Base Environment
   meta:
     id: env_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616801
-    modified: 1762958779531
+    modified: 1763014875169
     isPrivate: false
   data:
     base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
@@ -367,14 +367,14 @@ environments:
       meta:
         id: env_90a7a2fba5a843eebcfdd6b4c634cb81
         created: 1762944103438
-        modified: 1762958779530
+        modified: 1763014875168
         isPrivate: false
         sortKey: 1762944103438
       data:
         scheme: http
         base_path: ""
         host: localhost:8081
-        accountId: 29f77905-8b06-4223-b15c-2c7b2fd1d3c3
+        accountId: 190785d5-e546-40da-9511-1da0c430c032
       color: "#c38418"
 spec:
   contents:
