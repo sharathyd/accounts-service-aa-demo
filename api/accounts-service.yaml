@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_8c2fdb975bbe40edb5c6bf744cdb2329
       created: 1762944103439
-      modified: 1762945504787
+      modified: 1763100693398
       sortKey: -1762944103439
       description: Operations related to account management (retrieval and balance updates)
     children:
@@ -307,7 +307,7 @@ collection:
     meta:
       id: fld_dd5fcd7978844143bc61cbcea3f0cad8
       created: 1762944103439
-      modified: 1762944103439
+      modified: 1763100673920
       sortKey: -1762944103439
       description: Health check endpoints for monitoring service status
     children:
@@ -347,18 +347,23 @@ collection:
             send: true
             store: true
           rebuildPath: true
+    scripts:
+      afterResponse: |-
+        insomnia.test('check if status is 200', () => { 
+          insomnia.expect(insomnia.response.code).to.eql(200)
+        });
 cookieJar:
   name: Default Jar
   meta:
     id: jar_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616802
-    modified: 1762945504783
+    modified: 1763100673918
 environments:
   name: Base Environment
   meta:
     id: env_683f0c1347248ffc78f6b86dd0a9e847248da2e1
     created: 1762936616801
-    modified: 1762945504786
+    modified: 1763100673919
     isPrivate: false
   data:
     base_url: "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
@@ -367,7 +372,7 @@ environments:
       meta:
         id: env_90a7a2fba5a843eebcfdd6b4c634cb81
         created: 1762944103438
-        modified: 1762945504786
+        modified: 1763100673919
         isPrivate: false
         sortKey: 1762944103438
       data:
