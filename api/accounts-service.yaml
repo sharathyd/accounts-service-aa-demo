@@ -381,7 +381,7 @@ spec:
     openapi: 3.0.3
     info:
       title: Accounts API
-      version: 1.0.1
+      version: 1.0.2
       description: This API manages account information and balances.
       contact:
         email: stephen.brown@konghq.com
@@ -828,7 +828,7 @@ spec:
   meta:
     id: spc_a30de491eca248b588bc08ae075fc87f
     created: 1762936616800
-    modified: 1762963757550
+    modified: 1763111081278
 testSuites:
   - name: Accounts API Test Suite
     meta:
